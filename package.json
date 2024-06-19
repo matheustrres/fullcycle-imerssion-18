@@ -1,0 +1,10 @@
+{
+  "name": "fullcycle-imerssion-18",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Matheus Torres <matheustrres.rj@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/cli": "^10.3.2"
+  }
+}
