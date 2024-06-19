@@ -1,10 +1,16 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["debian-openssl-3.0.x"]
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+enum SpotStatus {
+  AVAILABLE
+  RESERVED
 }
 
 model Event {
@@ -13,8 +19,21 @@ model Event {
   description String
   date        DateTime
   price       Float
+  Spots       Spot[]
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @default(now()) @map("updated_at")
 
   @@map("events")
+}
+
+model Spot {
+  id        String     @id @default(uuid())
+  name      String
+  status    SpotStatus
+  Event     Event      @relation(fields: [eventId], references: [id])
+  eventId   String
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @default(now()) @map("updated_at")
+
+  @@map("spots")
 }
