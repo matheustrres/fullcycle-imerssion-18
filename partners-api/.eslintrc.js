@@ -33,11 +33,7 @@ module.exports = {
           "index",
           "sibling",
           "parent",
-          "/^@/@core/",
-          "/^@/application/",
-          "/^@/enterprise/",
-          "/^@/infrastructure/",
-          "/^@/shared/",
+          "/^@app/",
           "/^#/"
         ],
         "alphabetize": {
