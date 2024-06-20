@@ -12,8 +12,18 @@
     "outDir": "./dist",
     "noUnusedLocals": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "#/*": ["./tests/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "#/*": [
+        "./tests/*"
+      ],
+      "@app/core": [
+        "libs/core/src"
+      ],
+      "@app/core/*": [
+        "libs/core/src/*"
+      ]
     },
     "incremental": true,
     "skipLibCheck": true,
