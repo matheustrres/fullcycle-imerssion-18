@@ -1,9 +1,10 @@
-import { PrismaService } from '@/prisma/prisma.service';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Spot, SpotStatus } from '@prisma/client';
 
 import { CreateSpotDto } from './dto/create-spot.dto';
 import { UpdateSpotDto } from './dto/update-spot.dto';
+
+import { PrismaService } from '../prisma/prisma.service';
 
 type CreateSpotInput = CreateSpotDto & {
   eventId: string;

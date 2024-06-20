@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
@@ -10,12 +10,12 @@ services:
     volumes:
       - .:/home/node/app
 
-  db: 
+  db:
     image: mysql:8.0.30-debian
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: nest
     ports:
       - 3306:3306
     volumes:
-      - ./.docker/dbdata:/var/lib/mysql
+      # - ./.docker/dbdata:/var/lib/mysql
+      - ./.docker/mysql:/docker-entrypoint-initdb.d
