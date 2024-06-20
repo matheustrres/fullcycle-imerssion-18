@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { CreateEventDto } from './dto/create-event.dto';
+import { ReserveSpotDto } from './dto/reserve-spot.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { EventsService } from './events.service';
 
@@ -49,5 +50,18 @@ export class EventsController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return this.eventsService.remove(id);
+  }
+
+  @Post(':id/reserve')
+  async reserveSpots(
+    @Body() reserveSpotDto: ReserveSpotDto,
+    @Param('id') eventId: string,
+  ) {
+    const reservedSpots = await this.eventsService.reserveSpot(
+      reserveSpotDto,
+      eventId,
+    );
+
+    return reservedSpots;
   }
 }
