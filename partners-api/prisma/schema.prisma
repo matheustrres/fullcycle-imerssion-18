@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["debian-openssl-3.0.x"]
 }
 
@@ -11,6 +11,16 @@ datasource db {
 enum SpotStatus {
   AVAILABLE
   RESERVED
+}
+
+enum TicketKind {
+  FULL
+  HALF
+}
+
+enum TicketStatus {
+  RESERVED
+  CANCELLED
 }
 
 model Event {
@@ -27,13 +37,39 @@ model Event {
 }
 
 model Spot {
-  id        String     @id @default(uuid())
-  name      String
-  status    SpotStatus
-  Event     Event      @relation(fields: [eventId], references: [id])
-  eventId   String
-  createdAt DateTime   @default(now()) @map("created_at")
-  updatedAt DateTime   @default(now()) @map("updated_at")
+  id                   String               @id @default(uuid())
+  name                 String
+  status               SpotStatus
+  Event                Event                @relation(fields: [eventId], references: [id])
+  eventId              String
+  Ticket               Ticket?
+  ReservationHistories ReservationHistory[]
+  createdAt            DateTime             @default(now()) @map("created_at")
+  updatedAt            DateTime             @default(now()) @map("updated_at")
 
   @@map("spots")
+}
+
+model Ticket {
+  id         String     @id @default(uuid())
+  email      String
+  ticketKind TicketKind
+  Spot       Spot       @relation(fields: [spotId], references: [id])
+  spotId     String
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @default(now()) @map("updated_at")
+
+  @@unique([spotId])
+  @@map("tickets")
+}
+
+model ReservationHistory {
+  id         String       @id @default(uuid())
+  email      String
+  ticketKind TicketKind
+  status     TicketStatus
+  Spot       Spot         @relation(fields: [spotId], references: [id])
+  spotId     String
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @default(now()) @map("updated_at")
 }
