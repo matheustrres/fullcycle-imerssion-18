@@ -35,6 +35,20 @@ $ npm install
 ## Running the app
 
 ```bash
+docker-compose up --build
+```
+
+```bash
+docker compose exec app bash
+```
+
+Inside the container:
+
+```bash
+npx prisma migrate dev
+```
+
+```bash
 # development
 $ npm run start
 
