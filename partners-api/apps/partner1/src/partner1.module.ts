@@ -10,7 +10,7 @@ import { PrismaModule } from '@app/core/prisma/prisma.module';
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env.partner1',
-      cache: true,
+      cache: false,
     }),
     PrismaModule,
     EventsModule,
